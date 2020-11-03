@@ -49,7 +49,7 @@ branch 'main'
 stage('Deploy to K8')
 {
 when{
-branch 'master'
+branch 'main'
   }
 			
         steps{
@@ -60,7 +60,7 @@ branch 'master'
 		//	  )
 		sh "pwd"
 		//sh "kubectl delete -f deploy.yml"
-        sh "kubectl create -f deploy.yaml"
+        sh "kubectl apply -f kubernetes/mysql-configmap.yml"
 		}
             post {
 		    always{       mail to: "himanshu.upadhayay@knoldus.com",
