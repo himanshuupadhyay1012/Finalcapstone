@@ -47,6 +47,5 @@ public class Student {
     public void setGrade(String grade) {
         this.grade = grade;
     }
-    @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
-
-}
+    //@EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class})
+ }
