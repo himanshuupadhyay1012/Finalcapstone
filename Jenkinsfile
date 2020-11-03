@@ -18,7 +18,7 @@ stage('Testing')
 stage('packaging')
 {
 when{   
-branch 'master'
+branch 'main'
 }
    steps{
 	sh "mvn package"                                                                  //sbt package vs sbt assembly
@@ -27,7 +27,7 @@ branch 'master'
 stage('build image')
 {
 when{
-branch 'master'
+branch 'main'
      }
     steps{ 
 	 sh " docker build -t  himanshu1018/finalcapstone:$BUILD_NUMBER ."
@@ -36,7 +36,7 @@ branch 'master'
 stage('push image')
 {
 when{
-branch 'master'
+branch 'main'
      }
      steps{
      withCredentials([string(credentialsId: 'DOCKER_HUB_CREDENTIALS', variable: 'DOCKER_HUB_CREDENTIALS')]) {
