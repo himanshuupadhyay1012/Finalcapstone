@@ -1,0 +1,59 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: students-app
+  labels:
+    name: students-app
+spec:
+  ports:
+    - nodePort: 31008
+      port: 8080
+      targetPort: 8080
+      #protocol: TCP
+  selector:
+    app: students-app
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: students-app
+spec:
+  selector:
+    matchLabels:
+      app: students-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: students-app
+    spec:
+      containers:
+        - name: students-app
+          image: himanshu1018/finalcapstone:latest
+          
+      
+          ports:
+            - containerPort: 8080
+          env:   # Setting Enviornmental Variables
+            - name: DB_HOST   
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config  
+                  key: host
+            - name: DB_NAME  
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: name
+            - name: DB_USERNAME  
+              valueFrom:
+                secretKeyRef:
+                  name: db-user 
+                  key: username
+            - name: DB_PASSWORD 
+              valueFrom:
+                secretKeyRef:
+                  name: db-user
+                  key: password

@@ -1,0 +1,4 @@
+net/techtter/demo/student/controller/StudentController.class
+net/techtter/demo/student/entity/Student.class
+net/techtter/demo/student/repository/StudentRepository.class
+net/techtter/demo/student/StudentsApplication.class
